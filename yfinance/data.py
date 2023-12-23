@@ -11,6 +11,10 @@ from . import utils, cache
 
 cache_maxsize = 64
 
+proxy_url = ""
+def set_proxy_url(u):
+    global proxy_url
+    proxy_url = u
 
 def lru_cache_freezeargs(func):
     """
@@ -356,14 +360,20 @@ class YfData(metaclass=SingletonMeta):
         else:
             cookies = None
 
+        headers = user_agent_headers or self.user_agent_headers
+        if proxy_url:
+            headers["proxy-url"] = url
+            url = proxy_url
+
         request_args = {
             'url': url,
             'params': {**params, **crumbs},
             'cookies': cookies,
             'proxies': proxy,
             'timeout': timeout,
-            'headers': user_agent_headers or self.user_agent_headers
+            'headers': headers
         }
+        
         response = self._session.get(**request_args)
         utils.get_yf_logger().debug(f'response code={response.status_code}')
         if response.status_code >= 400:

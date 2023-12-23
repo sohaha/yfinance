@@ -25,6 +25,7 @@ from .tickers import Tickers
 from .multi import download
 from .utils import enable_debug_mode
 from .cache import set_tz_cache_location
+from .data import set_proxy_url
 
 __version__ = version.version
 __author__ = "Ran Aroussi"
@@ -44,4 +45,4 @@ def pdr_override():
         pass
 
 
-__all__ = ['download', 'Ticker', 'Tickers', 'pdr_override', 'enable_debug_mode', 'set_tz_cache_location']
+__all__ = ['download', 'Ticker', 'Tickers', 'pdr_override', 'enable_debug_mode', 'set_tz_cache_location','set_proxy_url']

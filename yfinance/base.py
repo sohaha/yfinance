@@ -369,6 +369,7 @@ class TickerBase:
 
         # Combine
         df = quotes.sort_index()
+
         if dividends.shape[0] > 0:
             df = utils.safe_merge_dfs(df, dividends, interval)
         if "Dividends" in df.columns:
